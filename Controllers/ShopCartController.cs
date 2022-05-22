@@ -2,7 +2,7 @@
 using CarShop.Data.Models;
 using CarShop.Pages;
 using Microsoft.AspNetCore.Mvc;
-using Shop.ViewsModels;
+using CarShop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
