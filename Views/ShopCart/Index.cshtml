@@ -1,0 +1,23 @@
+﻿
+@model ShopCartViewModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    @foreach (var el in Model.shopCarts.listShopItems)
+    {
+
+
+        <div class="col-lg-4">
+            <img class="img-thumbnail" src="@el._car._img" alt="@el._car._name" />
+            <h2>@el._car._name</h2>
+
+            <p> @el._car._shortDesc </p>
+            <p>Цена: @el._car._price.ToString("c")</p>
+
+        </div>
+    }
+    <hr />
+    <a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout"> Оплатить</a>
+</div>
