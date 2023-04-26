@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Главная";
 }
 
 <div class="row mt-5 mb-2">
@@ -15,7 +15,7 @@
 
             <p> @car._shortDesc </p>
             <p> Цена: @car._price.ToString("c")</p>
-            <p><a class="btn btn-warning" href="#">Подробнее</a></p>
+            <p> <a class="btn btn-warning" asp-controller="ShopCart" asp-action="AddToCart" asp-route-ID="@car.ID ">Оформить покупку</a> </p>
         </div>
         }
 

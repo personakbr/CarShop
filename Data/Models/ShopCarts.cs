@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -42,6 +43,34 @@ namespace CarShop.Data.Models
                 );
             _appDbContent.SaveChanges();
         }
+
+        //public void  Delete(ShopCarItem shopCar)
+        //{
+           
+        //    //if (id == null)
+        //    //{
+        //    //    return ();
+        //    //}
+        //    var car =  listShopItems
+        //        .FirstOrDefaultAsync(m => m == id);
+          
+        //    return View(actor);
+        //}
+
+        //// POST: Admin/ActorAdmin/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+           
+        //    var car = await _appDbContent.shopCarItems. () ;
+        //    _context.Actors.Remove(actor);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
+       
+     
+
         public List<ShopCarItem> GetShopItems() //функция котороя отображает всю корзину
         {
             return _appDbContent.shopCarItems.Where(c => c._shopCarID == shopCartID).Include(s => s._car).ToList();

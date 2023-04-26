@@ -1,0 +1,54 @@
+﻿@model Order
+@{
+    Layout = "_Layout";
+}
+<div class="row">
+    <h3>Оформление заказа</h3>
+</div>
+    
+    <div class="row">
+
+        <form asp-action="Checkout" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label asp-for="_name"></label>
+                <div class="col-md-10">
+                    <input asp-for="_name" class="form-control" />
+                    <span asp-validation-for="_name" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="_surname"></label>
+                <div class="col-md-10">
+                    <input asp-for="_surname" class="form-control" />
+                    <span asp-validation-for="_surname" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="_email"></label>
+                <div class="col-md-10">
+                    <input asp-for="_email" class="form-control" />
+                    <span asp-validation-for="_email" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="_address"></label>
+                <div class="col-md-10">
+                    <input asp-for="_address" class="form-control" />
+                    <span asp-validation-for="_address" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="_phoneNumber"></label>
+                <div class="col-md-10">
+                    <input asp-for="_phoneNumber" class="form-control" />
+                    <span asp-validation-for="_phoneNumber" class="text-danger"></span>
+                </div>
+
+            </div>
+            <input class="btn btn-success" type="submit" value="Отправить" />
+        </form>
+    </div>

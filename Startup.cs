@@ -1,6 +1,7 @@
 using CarShop.Data;
 using CarShop.Data.Interfaces;
 using CarShop.Data.Models;
+using CarShop.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,8 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Shop.Data;
-using Shop.Data.Repository;
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,17 +36,25 @@ namespace CarShop
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
             services.AddRazorPages();
             services.AddTransient<IAllCars, CarRepository>();
             services.AddTransient<ICarsCategory, CategoryRepository>();
+            services.AddTransient<IAllOrders, OdersRepository>();
+            services.AddTransient<ICreateCar, CreateCarRepository>();
+
+            services.AddControllersWithViews();
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => ShopCarts.getCart(sp)); //дл€ создани€ разных корзин разным пользовател€м
             services.AddMemoryCache();
             services.AddSession();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,12 +81,34 @@ namespace CarShop
             app.UseAuthorization();
 
             app.UseSession();
+
+
+
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
-            });
+                
 
+                endpoints.MapAreaControllerRoute(
+                 name: "Admin", areaName: "Admin",
+                    pattern: "Admin/{controller=Actors}/{action=Index}/{id?}");
+
+
+
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                   name: "first",
+                   pattern: "{controller=ShopCartController}/{action=ShopCart/Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                 name: "twice",
+                 pattern: "{controller=CreateCarController}/{action=CreateCar/Checkout}/{id?}");
+
+            });
            
+          
+
+
         }
     }
 }
